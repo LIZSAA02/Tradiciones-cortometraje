@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cincuenta Manos, Cincuenta Memorias - Formulario de Participación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            color: #5a6c7d;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .intro {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .intro h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .intro p {
+            color: #5a6c7d;
+            margin-bottom: 10px;
+        }
+
+        .setup-instructions {
+            background: #fff3cd;
+            border: 2px solid #ffeeba;
+            color: #856404;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .setup-instructions h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .setup-instructions ol {
+            margin-left: 20px;
+        }
+
+        .setup-instructions li {
+            margin-bottom: 8px;
+        }
+
+        .setup-instructions code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        .highlight-question {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .highlight-question h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight-question textarea {
+            margin-top: 15px;
+            min-height: 150px;
+            font-size: 1.1em;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 4px;
+            min-width: 18px;
+            height: 18px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-group label {
+            font-size: 1em;
+            line-height: 1.4;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            position: relative;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .submit-btn .loading {
+            display: none;
+        }
+
+        .submit-btn.loading .loading {
+            display: inline;
+        }
+
+        .submit-btn.loading .text {
+            display: none;
+        }
+        
+        .privacy-note {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #28a745;
+            font-size: 0.9em;
+            color: #5a6c7d;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .highlight-question h3 {
+                font-size: 1.5em;
+            }
+
+            .setup-instructions {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cincuenta Manos, Cincuenta Memorias</h1>
+            <p>"Manos que tejieron historia, juegos que dieron vida: relatos de un Panamá que resiste en la memoria"</p>
+        </div>
+        <div class="success-message" id="successMessage">
+            <h3>¡Gracias por tu participación! 🎉</h3>
+            <p>Hemos recibido tu tradición familiar. Nos pondremos en contacto contigo pronto para coordinar la grabación.</p>
+        </div>
+        
+        <div class="intro">
+            <h2>¡Comparte tu historia familiar!</h2>
+            <p>Estamos creando un documental que celebra las tradiciones familiares más curiosas y entrañables de Panamá.</p>
+            <p>Tu historia puede ser parte de este proyecto que honra la memoria de nuestras familias.</p>
+            <p><strong>Duración de la entrevista:</strong> 5-10 minutos | <strong>Lugar:</strong> Flexible según tu tradición</p>
+        </div>
+        
+        <form id="tradicionesForm" action="https://formspree.io/f/xpwroklg" method="POST">
+            <input type="hidden" name="_subject" value="Nueva tradición familiar - Cincuenta Manos">
+            <input type="hidden" name="_next" value="">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre completo <span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required>
+                <div class="error-message">Por favor ingresa tu nombre completo</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" name="edad" min="16" max="100" placeholder="Ej: 25">
+            </div>
+            
+            <div class="form-group">
+                <label for="provincia">Provincia de origen <span class="required">*</span></label>
+                <select id="provincia" name="provincia" required>
+                    <option value="">Selecciona tu provincia</option>
+                    <option value="Bocas del Toro">Bocas del Toro</option>
+                    <option value="Chiriquí">Chiriquí</option>
+                    <option value="Coclé">Coclé</option>
+                    <option value="Colón">Colón</option>
+                    <option value="Darién">Darién</option>
+                    <option value="Herrera">Herrera</option>
+                    <option value="Los Santos">Los Santos</option>
+                    <option value="Panamá">Panamá</option>
+                    <option value="Panamá Oeste">Panamá Oeste</option>
+                    <option value="Veraguas">Veraguas</option>
+                    <option value="Guna Yala">Guna Yala</option>
+                    <option value="Emberá-Wounaan">Emberá-Wounaan</option>
+                    <option value="Ngäbe-Buglé">Ngäbe-Buglé</option>
+                </select>
+                <div class="error-message">Por favor selecciona tu provincia</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="telefono">Teléfono de contacto <span class="required">*</span></label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej: +507 6123-4567" required>
+                <div class="error-message">Por favor ingresa tu número de teléfono</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com">
+                <div class="error-message">Por favor ingresa un email válido</div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="highlight-question">
+                <h3>🏠 PREGUNTA PRINCIPAL 🏠</h3>
+                <label for="tradicion_principal">¿Cuál es esa herencia o tradición característica de tu linaje familiar que consideras curiosa, especial o única?</label>
+                <textarea id="tradicion_principal" name="tradicion_principal" placeholder="Ejemplo: 'En mi familia, cada vez que llueve, mi abuela nos hace cantar una canción específica para que pare...' Describe tu tradición de forma detallada." required></textarea>
+                <div class="error-message">Por favor describe tu tradición familiar</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="origen_tradicion">¿Sabes de dónde viene esta tradición? ¿Quién la inició en tu familia?</label>
+                <textarea id="origen_tradicion" name="origen_tradicion" placeholder="Cuéntanos la historia de cómo comenzó esta tradición en tu familia..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="generaciones">¿Cuántas generaciones lleva practicándose esta tradición en tu familia?</label>
+                <select id="generaciones" name="generaciones">
+                    <option value="">Selecciona</option>
+                    <option value="1">Solo yo la practico</option>
+                    <option value="2">Mis padres y yo</option>
+                    <option value="3">Mis abuelos, padres y yo</option>
+                    <option value="4">Mis bisabuelos, abuelos, padres y yo</option>
+                    <option value="5+">Más de 4 generaciones</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="frecuencia">¿Con qué frecuencia practican esta tradición?</label>
+                <select id="frecuencia" name="frecuencia">
+                    <option value="">Selecciona</option>
+                    <option value="diario">Diariamente</option>
+                    <option value="semanal">Semanalmente</option>
+                    <option value="mensual">Mensualmente</option>
+                    <option value="fechas_especiales">En fechas especiales</option>
+                    <option value="ocasional">Ocasionalmente</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="objetos_necesarios">¿Requiere objetos específicos, lugares especiales o ingredientes particulares?</label>
+                <textarea id="objetos_necesarios" name="objetos_necesarios" placeholder="Describe si necesitas algo específico para llevar a cabo esta tradición..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="significado">¿Qué significa esta tradición para ti y tu familia?</label>
+                <textarea id="significado" name="significado" placeholder="Explica el valor emocional o simbólico que tiene esta tradición..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="disponibilidad">¿Cuándo estarías disponible para la grabación?</label>
+                <select id="disponibilidad" name="disponibilidad">
+                    <option value="">Selecciona</option>
+                    <option value="mananas">Mañanas</option>
+                    <option value="tardes">Tardes</option>
+                    <option value="fines_semana">Fines de semana</option>
+                    <option value="flexible">Horario flexible</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="locacion_preferida">¿Dónde te gustaría que se realice la grabación?</label>
+                <select id="locacion_preferida" name="locacion_preferida">
+                    <option value="">Selecciona</option>
+                    <option value="mi_casa">En mi casa</option>
+                    <option value="lugar_tradicion">En el lugar donde practicamos la tradición</option>
+                    <option value="estudio">En un estudio</option>
+                    <option value="lugar_publico">En un lugar público</option>
+                    <option value="flexible">Flexible</option>
+                </select>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="consentimiento" name="consentimiento" required>
+                <label for="consentimiento">
+                    Autorizo el uso de mi imagen y voz para fines del documental "Cincuenta Manos, Cincuenta Memorias" y su difusión en el concurso de cortometrajes. <span class="required">*</span>
+                </label>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="contacto_futuro" name="contacto_futuro">
+                <label for="contacto_futuro">
+                    Acepto ser contactado para futuras producciones similares.
+                </label>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="text">Enviar mi tradición familiar</span>
+                <span class="loading">Enviando... ⏳</span>
+            </button>
+            
+            <div class="privacy-note">
+                <strong>Nota de privacidad:</strong> Tu información personal será utilizada únicamente para los fines de este proyecto documental. Puedes solicitar la eliminación de tus datos en cualquier momento contactando al equipo de producción.
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Configuración del formulario
+        const form = document.getElementById('tradicionesForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Función para validar email
+        function isValidEmail(email) {
+            if (!email) return true; // Email es opcional
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Función para validar teléfono
+        function isValidPhone(phone) {
+            const phoneRegex = /^(\+507\s?)?[0-9\s\-]{7,15}$/;
+            return phoneRegex.test(phone.trim());
+        }
+        
+        // Función para mostrar errores
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const formGroup = field.closest('.form-group');
+            const errorDiv = formGroup.querySelector('.error-message');
+            
+            formGroup.classList.add('error');
+            if (message && errorDiv) {
+                errorDiv.textContent = message;
+            }
+        }
+        
+        // Función para limpiar errores
+        function clearError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const formGroup = field.closest('.form-group');
+            formGroup.classList.remove('error');
+        }
+        
+        // Validación en tiempo real
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('input', function() {
+                clearError(this.id);
+                
+                // Validación específica por tipo
+                if (this.type === 'email' && this.value) {
+                    if (!isValidEmail(this.value)) {
+                        showError(this.id, 'Por favor ingresa un email válido');
+                    }
+                }
+                
+                if (this.type === 'tel' && this.value) {
+                    if (!isValidPhone(this.value)) {
+                        showError(this.id, 'Formato: +507 6123-4567 o 6123-4567');
+                    }
+                }
+            });
+            
+            element.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+            });
+            
+            element.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.style.borderColor = '#ddd';
+                }
+            });
+        });
+        
+        // Manejo del envío del formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Limpiar errores previos
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            
+            // Validar campos requeridos
+            const requiredFields = [
+                { id: 'nombre', message: 'Por favor ingresa tu nombre completo' },
+                { id: 'provincia', message: 'Por favor selecciona tu provincia' },
+                { id: 'telefono', message: 'Por favor ingresa tu número de teléfono' },
+                { id: 'tradicion_principal', message: 'Por favor describe tu tradición familiar' }
+            ];
+            
+            let isValid = true;
+            
+            // Validar campos requeridos
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field.id);
+                if (!element.value.trim()) {
+                    showError(field.id, field.message);
+                    isValid = false;
+                }
+            });
+            
+            // Validar consentimiento
+            const consentimiento = document.getElementById('consentimiento');
+            if (!consentimiento.checked) {
+                const formGroup = consentimiento.closest('.checkbox-group');
+                formGroup.style.borderLeft = '3px solid #e74c3c';
+                formGroup.style.paddingLeft = '15px';
+                formGroup.style.backgroundColor = '#fdf2f2';
+                isValid = false;
+                
+                setTimeout(() => {
+                    formGroup.style.border = 'none';
+                    formGroup.style.paddingLeft = '0';
+                    formGroup.style.backgroundColor = 'transparent';
+                }, 3000);
+            }
+            
+            // Validar email si se proporciona
+            const email = document.getElementById('email');
+            if (email.value && !isValidEmail(email.value)) {
+                showError('email', 'Por favor ingresa un email válido');
+                isValid = false;
+            }
+            
+            // Validar teléfono
+            const telefono = document.getElementById('telefono');
+            if (telefono.value && !isValidPhone(telefono.value)) {
+                showError('telefono', 'Formato: +507 6123-4567 o 6123-4567');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                // Scroll al primer error
+                const firstError = document.querySelector('.form-group.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            // Si todo está válido, enviar formulario
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            
+            // Crear FormData para envío
+            const formData = new FormData(form);
+            
+            // Enviar a Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Éxito
+                    form.style.display = 'none';
+                    successMessage.classList.add('show');
+                    
+                    // Scroll arriba
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Opcional: reiniciar después de 10 segundos
+                    setTimeout(() => {
+                        form.reset();
+                        form.style.display = 'block';
+                        successMessage.classList.remove('show');
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('loading');
+                    }, 10000);
+                    
+                } else {
+                    throw new Error('Error en el envío');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar el formulario. Por favor intenta de nuevo.');
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+            });
+        });
+        
+        // Formateo automático del teléfono
+        document.getElementById('telefono').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length > 0) {
+                if (value.startsWith('507')) {
+                    value = '+507 ' + value.substring(3);
+                } else if (!value.startsWith('507') && value.length >= 8) {
+                    // Formato local
+                    value = value.substring(0, 4) + '-' + value.substring(4, 8);
+                }
+            }
+            
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
